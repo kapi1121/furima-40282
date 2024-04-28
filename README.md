@@ -25,14 +25,16 @@ Things you may want to cover:
 
 ## usersテーブル
 
-| Column     | Type   | Options                  |
-| ---------- | ------ | ------------------------ |
-| nickname   | string | null: false              |
-| email      | string | null: false, unique:true |
-| password   | string | null: false              |
-| name       | string | null: false              |
-| name_kana  | string | null: false              |
-| birth_date | string | null: false              |
+| Column              | Type   | Options                  |
+| ------------------- | ------ | ------------------------ |
+| nickname            | string | null: false              |
+| email               | string | null: false, unique:true |
+| encrypted_password  | string | null: false              |
+| family_name         | string | null: false              |
+| personal_name       | string | null: false              |
+| family_name_kana    | string | null: false              |
+| personal_name_kana  | string | null: false              |
+| birth_date          | date   | null: false              |
 
 
 ### Association
@@ -42,49 +44,48 @@ Things you may want to cover:
 
 ## itemsテーブル
 
-| Column               | Type       | Options                        |
-| -------------------- | ---------- | ------------------------------ |
-| product_name         | string     | null: false                    |
-| category             | string     | null: false                    |
-| price                | string     | null: false                    |
-| seller               | string     | null: false                    |
-| product_introduction | string     | null: false                    |
-| product_condition    | string     | null: false                    |
-| shipping_charges     | string     | null: false                    |
-| region_of_origin     | string     | null: false                    |
-| days_until_shipping  | string     | null: false                    |
-| user_id              | references | null: false, foreign_key: true |
+| Column                 | Type       | Options                        |
+| ---------------------- | ---------- | ------------------------------ |
+| product_name           | string     | null: false                    |
+| category_id            | integer    | null: false                    |
+| price                  | integer    | null: false                    |
+| product_introduction   | text       | null: false                    |
+| product_condition_id   | integer    | null: false                    |
+| shipping_charges_id    | integer    | null: false                    |
+| prefectures_id         | integer    | null: false                    |
+| days_until_shipping_id | integer    | null: false                    |
+| user                   | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :purchases
+- has_one :purchase
 
 ## purchasesテーブル
  
-| Column  | Type       | Options                        |
-| --------| ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_one :shippings
+- has_one :shipping
 
 ## shippingsテーブル
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
 | post_code      | string     | null: false                    |
-| prefectures    | string     | null: false                    |
+| prefectures_id | integer    | null: false                    |
 | municipality   | string     | null: false                    |
 | street_address | string     | null: false                    |
 | building_name  | string     |                                |
 | phone_number   | string     | null: false                    |
-| purchase_id    | references | null: false, foreign_key: true |
+| purchase       | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchases
+- belongs_to :purchase
