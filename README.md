@@ -51,8 +51,8 @@ Things you may want to cover:
 | price                  | integer    | null: false                    |
 | product_introduction   | text       | null: false                    |
 | product_condition_id   | integer    | null: false                    |
-| shipping_charges_id    | integer    | null: false                    |
-| prefectures_id         | integer    | null: false                    |
+| shipping_charge_id     | integer    | null: false                    |
+| prefecture_id          | integer    | null: false                    |
 | days_until_shipping_id | integer    | null: false                    |
 | user                   | references | null: false, foreign_key: true |
 
@@ -79,7 +79,7 @@ Things you may want to cover:
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
 | post_code      | string     | null: false                    |
-| prefectures_id | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
 | municipality   | string     | null: false                    |
 | street_address | string     | null: false                    |
 | building_name  | string     |                                |
