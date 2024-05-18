@@ -58,17 +58,17 @@ RSpec.describe Item, type: :model do
       it '価格が整数でない場合、アイテムは保存できない。' do
         @item.price = 300.5
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be an integer")
+        expect(@item.errors.full_messages).to include('Price must be an integer')
       end
       it '価格が300以下の場合、アイテムは保存できない' do
         @item.price = 200
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '価格が9999999以上の場合、アイテムは保存できない' do
-        @item.price = 10000000
-        @item.valid? 
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        @item.price = 10_000_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'カテゴリーIDが1の場合、アイテムは保存できない' do
         @item.category_id = 1
