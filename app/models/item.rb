@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_charge
   belongs_to :days_until_shipping
   belongs_to :user
+  has_one_attached :image
 
   validates :image, presence: true
   validates :product_name, presence: true

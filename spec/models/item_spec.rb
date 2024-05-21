@@ -98,12 +98,12 @@ RSpec.describe Item, type: :model do
       it 'userが紐づいていない場合は登録できない' do
         @item = build(:item, user: nil)
         @item.valid?
-        expect(@item.errors[:user]).to include("must exist")
+        expect(@item.errors[:user]).to include('must exist')
       end
       it '価格が半角数値以外（全角を含む場合）保存できない' do
-        @item = build(:item, price: "一二三")
+        @item = build(:item, price: '一二三')
         @item.valid?
-        expect(@item.errors[:price]).to include("is not a number")
+        expect(@item.errors[:price]).to include('is not a number')
       end
     end
   end
