@@ -39,11 +39,8 @@ class ItemsController < ApplicationController
   def destroy
     if @item.user == current_user
       @item.destroy
-      redirect_to root_path
-    else
-      flash[:alert] = "You are not authorized to perform this action."
-      redirect_to items_path(@item)
     end
+      redirect_to root_path
   end
 
   private
