@@ -1,5 +1,7 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
+  before_action :redirect_if_necessary, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -14,6 +16,7 @@ class PurchasesController < ApplicationController
       redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      set_item
       render :index, status: :unprocessable_entity
     end
   end
@@ -40,5 +43,12 @@ class PurchasesController < ApplicationController
       card: purchase_shipping_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def redirect_if_necessary
+    set_item
+    if current_user.id == @item.user_id || @item.purchase.present?
+      redirect_to root_path
+    end
   end
 end
